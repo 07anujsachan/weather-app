@@ -77,9 +77,11 @@ async function success(pos) {
     .format("HH:mm a");
   sunset.innerText = " Sunset : " + sunSetTime;
   let pressure = document.querySelector(".pressure");
-  pressure.innerText = "Pressure" + " : " + Math.round(weather.main.pressure);
+  pressure.innerText =
+    "Pressure" + " : " + Math.round(weather.main.pressure) + " " + "hPa";
   let sealvl = document.querySelector(".sea-lvl");
-  sealvl.innerText = "Sea-level" + " : " + Math.round(weather.main.sea_level);
+  sealvl.innerText =
+    "Sea-level" + " : " + Math.round(weather.main.sea_level) + " " + "m";
 
   if (weather.weather[0].main == "Clouds") {
     icon.src = "./assets/clouds.png";
@@ -155,9 +157,23 @@ async function checkWeather(city) {
   let typ = document.querySelector(".type");
   typ.innerText = data.weather[0].main;
   let sunrise = document.querySelector(".sunrise");
-  sunrise.innerText = " Sunrise : " + data.sys.sunrise;
+  let sunRiseTime = moment
+    .utc(data.sys.sunrise, "X")
+    .add(data.timezone, "seconds")
+    .format("HH:mm a");
+  sunrise.innerText = " Sunrise : " + sunRiseTime;
   let sunset = document.querySelector(".sunset");
-  sunset.innerText = " Sunset : " + data.sys.sunset;
+  let sunSetTime = moment
+    .utc(data.sys.sunset, "X")
+    .add(data.timezone, "seconds")
+    .format("HH:mm a");
+  sunset.innerText = " Sunset : " + sunSetTime;
+  let pressure = document.querySelector(".pressure");
+  pressure.innerText =
+    "Pressure" + " : " + Math.round(data.main.pressure) + " " + "hPa";
+  let sealvl = document.querySelector(".sea-lvl");
+  sealvl.innerText =
+    "Sea-level" + " : " + Math.round(data.main.sea_level) + " " + "m";
 
   if (data.weather[0].main == "Clouds") {
     icon.src = "./assets/clouds.png";
