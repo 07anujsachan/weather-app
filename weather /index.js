@@ -1,3 +1,4 @@
+// Api key for weather api
 const apiKey = "40e8bc84aa5617fb32b224eb6623da34";
 const apiUrl =
   "https://api.openweathermap.org/data/2.5/weather?units=metric&q=";
@@ -14,7 +15,8 @@ const options = {
   maximumAge: 0,
 };
 
-async function success(pos) {
+// This function used for fetching weather details for user location if any location is not entered manually.
+async function checkWeatherForUserLocation(pos) {
   const crd = pos.coords;
 
   let latitude = crd.latitude;
@@ -31,7 +33,6 @@ async function success(pos) {
     loaderContainer.style.display = "none";
     search.style.visibility = "visible";
   }
-
   const newDate = new Date();
   const time = newDate.getTime();
   const localOffset = newDate.getTimezoneOffset() * 60000;
@@ -117,9 +118,9 @@ function error(err) {
 }
 
 if (!searchBox.value) {
-  navigator.geolocation.getCurrentPosition(success, error, options);
+  navigator.geolocation.getCurrentPosition(checkWeatherForUserLocation, error, options);
 }
-
+// This function  used  for fetching  weather details for enterd location  in  the search box manually.
 async function checkWeather(city) {
   const response = await fetch(apiUrl + city + `&appid=${apiKey}`);
   var data = await response.json();
