@@ -10,3 +10,10 @@ This weather-app provides you ;
 .Wind speed 
 .Pressure and precipitation information
 .Sunrise/sunset time
+
+
+Tech Stack: HTML, Tailwind CSS, Javascript, CSS
+
+Hosted on Github, deployed on vercel 
+
+Link for preview: https://weather-app-puce-three-67.vercel.app/
